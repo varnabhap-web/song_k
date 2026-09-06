@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>For Kuhu didi</title>
+    <meta name="description" content="Tap to play — for Kuhu didi." />
+    <meta name="theme-color" content="#070b14" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Kuhu" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="covers/here-comes-the-sun.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/player.css" />
+  </head>
+  <body class="live-player-page">
+    <main class="live-stage">
+      <article class="sp-card live-card" id="liveCard" aria-label="Music player card">
+        <div id="artSlot"></div>
+
+        <div class="sp-body">
+          <div class="sp-title-row">
+            <div class="sp-titles">
+              <h1 id="songTitle">Here Comes the Sun</h1>
+              <p class="sp-artist" id="artistLabel">The Beatles</p>
+              <p class="sp-dedication" id="dedicationLabel">For Kuhu didi</p>
+            </div>
+            <svg class="sp-heart" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+              />
+            </svg>
+          </div>
+
+          <div
+            class="sp-progress"
+            id="progress"
+            role="slider"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            aria-label="Song progress"
+            tabindex="0"
+          >
+            <span class="sp-progress-track">
+              <span class="sp-progress-fill" id="progressFill"></span>
+              <span class="sp-progress-knob" id="progressKnob"></span>
+            </span>
+            <div class="sp-times">
+              <span id="timeCurrent">0:00</span>
+              <span id="timeDuration">0:00</span>
+            </div>
+          </div>
+
+          <div class="sp-controls">
+            <button type="button" class="sp-ctrl" id="shuffleBtn" aria-label="Shuffle" disabled>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M10.59 9.17 5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"
+                />
+              </svg>
+            </button>
+            <button type="button" class="sp-ctrl" id="prevBtn" aria-label="Previous song">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M6 6h2v12H6V6zm3.5 6 8.5 6V6l-8.5 6z" />
+              </svg>
+            </button>
+            <button type="button" class="sp-play" id="playBtn" aria-label="Play">
+              <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M8 5v14l11-7L8 5z" />
+              </svg>
+              <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M6 5h4v14H6V5zm8 0h4v14h-4V5z" />
+              </svg>
+            </button>
+            <button type="button" class="sp-ctrl" id="nextBtn" aria-label="Next song">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              class="sp-ctrl is-on"
+              id="repeatBtn"
+              aria-label="Repeat song on"
+              aria-pressed="true"
+            >
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"
+                />
+              </svg>
+              <span class="repeat-one" aria-hidden="true">1</span>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <button type="button" class="tap-gate" id="tapGate" hidden>
+        <span class="tap-gate-label">Tap to play</span>
+        <span class="tap-gate-sub" id="tapGateSub">For Kuhu didi — then lock the phone</span>
+      </button>
+
+      <p class="live-note" id="audioNote" hidden>
+        Add the song file into <code>audio/</code> (see <code>audio/README.md</code>).
+      </p>
+
+      <audio
+        id="audio"
+        preload="auto"
+        playsinline
+        webkit-playsinline
+        x-webkit-airplay="allow"
+      ></audio>
+    </main>
+
+    <script src="js/player.js"></script>
+  </body>
+</html>
